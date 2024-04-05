@@ -1,22 +1,16 @@
 import { useState } from 'react';
-const ListGroup = () => {
+
+type ListGroupProps = {
+  items: string[];
+  heading: string;
+  onSelectItem(item: string): void;
+};
+const ListGroup = ({ items, heading, onSelectItem }: ListGroupProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
-  const items = [
-    'Tokyo',
-    'New York',
-    'London',
-    'Paris',
-    'Beijing',
-    'Moscow',
-    'Seoul',
-    'Berlin',
-    'Madrid',
-    'Rome',
-  ];
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length === 0 && <p>No items found.</p>}
       <ul className="list-group ">
         {items.map((item, index) => (
@@ -27,7 +21,10 @@ const ListGroup = () => {
                 ? 'list-group-item active'
                 : 'list-group-item'
             }
-            onClick={() => setSelectIndex(index)}
+            onClick={() => {
+              setSelectIndex(index);
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>
