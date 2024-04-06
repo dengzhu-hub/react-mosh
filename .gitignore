@@ -25,5 +25,6 @@ dist-ssr
 package-lock.json
 .husky/
 tsconfig.node.json
- vite.config.ts
-   public/
+vite.config.ts
+public/
+.eslintcache
