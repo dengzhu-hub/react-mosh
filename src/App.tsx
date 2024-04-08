@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Alert from './components/Alert';
-import Button from './components/ListGroup/Button/Button';
+import { Button } from './components/Button';
 import { ListGroup } from './components/ListGroup';
 
 function App() {
