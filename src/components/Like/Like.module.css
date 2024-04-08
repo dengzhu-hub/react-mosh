@@ -1,0 +1,10 @@
+.like {
+  font-size: 42px;
+  cursor: pointer;
+}
+.like-fill {
+  color: #ff0000;
+}
+.like-empty {
+  color: #ccc;
+}

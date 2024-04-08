@@ -3,6 +3,9 @@ import './App.css';
 import Alert from './components/Alert';
 import { Button } from './components/Button';
 import { ListGroup } from './components/ListGroup';
+import Like from './components/Like/Like';
+import StrictMode from './components/StrictMode';
+import UpdateObject from './components/UpdateObject';
 
 function App() {
   const [joker, setJoker] = useState('');
@@ -52,6 +55,9 @@ function App() {
       <Button color="primary" onClick={handleShowAlert}>
         <span>Click me</span>
       </Button>
+      <Like />
+      <StrictMode />
+      <UpdateObject />
     </>
   );
 }
