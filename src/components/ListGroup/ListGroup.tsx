@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { FaBeer } from 'react-icons/fa';
 import styled from 'styled-components';
 const List = styled.ul`
   list-style: none;
@@ -30,11 +30,13 @@ const ListGroup = ({ items, heading, onSelectItem }: ListGroupProps) => {
 
   return (
     <>
+      <FaBeer />
       <h1>{heading}</h1>
       {items.length === 0 && <p>No items found.</p>}
       <List>
         {items.map((item, index) => (
           <ListItem
+            style={{ backgroundColor: '#087f5b' }}
             $active={index === selectIndex}
             key={index}
             className={

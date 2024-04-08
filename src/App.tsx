@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Alert from './components/Alert';
-import Button from './components/Button';
+import Button from './components/ListGroup/Button/Button';
 import { ListGroup } from './components/ListGroup';
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
         heading="Master Javascript"
         onSelectItem={handleSelectItem}
       />
-      <Button color="info" onClick={handleShowAlert}>
+      <Button color="primary" onClick={handleShowAlert}>
         <span>Click me</span>
       </Button>
     </>

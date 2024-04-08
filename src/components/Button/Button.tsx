@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
+import styles from './Button.module.css';
 interface ButtonProps {
   children: ReactNode;
   onClick: () => void;
   color?: 'primary' | 'close' | 'secondary' | 'danger' | 'info';
 }
-const Button = ({ children, onClick, color = 'danger' }: ButtonProps) => {
+const Button = ({ children, onClick, color = 'primary' }: ButtonProps) => {
   return (
     <button
-     
       type="button"
-      className={`btn btn-${color}`}
+      className={[styles.btn, styles[`btn-${color}`]].join(' ')}
       onClick={onClick}
     >
       {children}
