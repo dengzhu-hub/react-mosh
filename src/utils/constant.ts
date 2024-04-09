@@ -1,1 +1,1 @@
-export const categories = ['jonas', 'jack', 'james'];
+export const categories = ['jonas', 'jack', 'james'] as const;
