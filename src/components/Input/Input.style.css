@@ -1,0 +1,21 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 12px;
+}
+.desc {
+  font-size: 24px;
+  color: #777;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+.input-text {
+  width: 60%;
+  padding: 4px 8px;
+  border: 2px solid #087f5b;
+  border-radius: 7px;
+}
+.input-text:focus {
+  outline: none;
+}
