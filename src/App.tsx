@@ -6,10 +6,20 @@ import { ListGroup } from './components/ListGroup';
 import Like from './components/Like/Like';
 import StrictMode from './components/StrictMode';
 import UpdateObject from './components/UpdateObject';
+import NavBar from './components/NavBar';
+import CartIt from './components/CartIt';
+import ExpandableText from './components/ExpandableText';
+import Form from './components/Form/Form';
 
 function App() {
   const [joker, setJoker] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
+  const [cartItems, setCartItems] = useState<string[]>([
+    'laptops',
+    'iphone',
+    'books',
+    'power pc',
+  ]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,6 +68,10 @@ function App() {
       <Like />
       <StrictMode />
       <UpdateObject />
+      <NavBar cartItemCount={cartItems.length} />
+      <CartIt cartItems={cartItems} onClearCartItem={() => setCartItems([])} />
+      <ExpandableText>Hello world!</ExpandableText>
+      <Form />
     </>
   );
 }
