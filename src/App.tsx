@@ -3,10 +3,10 @@ import './App.css';
 import ExpendFilter from './components/ExpendFilter';
 
 import ExpenseList from './ExpenseList';
-import Form from './components/Form/Form';
+import ExpenseForm, { ExpenseFormData } from './components/Form/Form';
 
 function App() {
-  // const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [expenses, setExpenses] = useState([
     {
       id: 1,
@@ -57,15 +57,28 @@ function App() {
       category: 'jack',
     },
   ]);
-  // const visibleExpense = selectedCategory
-  //   ? expenses.filter(expense => (expense.category = selectedCategory))
-  //   : expenses;
+  const handleAddExpense = (expense: ExpenseFormData) => {
+    setExpenses([
+      ...expenses,
+      {
+        id: expenses.length + 1,
+        description: expense.desc,
+        amount: expense.amount,
+        category: expense.categories,
+      },
+    ]);
+  };
+  const visibleExpense = selectedCategory
+    ? expenses.filter(expense => expense.category === selectedCategory)
+    : expenses;
   return (
     <>
-      <Form />
-      <ExpendFilter onSelectCategory={category => console.log(category)} />
+      <ExpenseForm onSubmit={expense => handleAddExpense(expense)} />
+      <ExpendFilter
+        onSelectCategory={category => setSelectedCategory(category)}
+      />
       <ExpenseList
-        expenses={expenses}
+        expenses={visibleExpense}
         onDeleteExpense={id =>
           setExpenses(expenses.filter(expense => expense.id !== id))
         }

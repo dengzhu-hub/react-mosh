@@ -1,14 +1,17 @@
 import { categories } from '../../utils/constant';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useRef } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
+interface Props {
+  onSubmit: (data: ExpenseFormData) => void;
+}
 const userSchema = z.object({
   desc: z
     .string({ required_error: 'Description is required' })
     .min(3, { message: 'Description must be at least 3 characters' })
-    .max(50, { message: 'Description cannot be more than 50 characters' })
-    .refine(value => !!value, { message: 'Description is required' }),
+    .max(50, { message: 'Description cannot be more than 50 characters' }),
   amount: z
     .number({ invalid_type_error: 'Amount is required' })
     .min(1, { message: 'Amount must be at least 1' })
@@ -17,31 +20,49 @@ const userSchema = z.object({
     errorMap: () => ({ message: 'Category is required' }),
   }),
 });
-type UserFormData = z.infer<typeof userSchema>;
-const Form = () => {
+
+export type ExpenseFormData = z.infer<typeof userSchema>;
+const ExpenseForm = ({ onSubmit }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserFormData>({ resolver: zodResolver(userSchema) });
-
-  console.log(errors);
-
-  const OnSubmit = (data: FieldValues) => {
-    console.log(data);
-  };
+    reset,
+    formState: { errors, isValid, isDirty },
+  } = useForm<ExpenseFormData>({
+    resolver: zodResolver(userSchema),
+    defaultValues: {
+      desc: '',
+      amount: 1,
+      categories: categories[0],
+    },
+  });
 
   return (
-    <form action="" onSubmit={handleSubmit(OnSubmit)}>
+    <form
+      action=""
+      onSubmit={handleSubmit(data => {
+        onSubmit(data);
+        reset(
+          { desc: 'jonas will never disappear', amount: 1 },
+          {
+            keepDefaultValues: true,
+          },
+        );
+      })}
+    >
       <div className="mb-3">
         <label className="form-label" htmlFor="desc">
           Description
         </label>
         <input
           type="text"
+          ref={inputRef}
           className="form-control"
           id="desc"
-          {...register('desc', { required: true })}
+          {...register('desc', {
+            required: true,
+          })}
         />
         {errors.desc && (
           <span className="text-danger fw-bold">{errors.desc.message}</span>
@@ -64,12 +85,7 @@ const Form = () => {
         <label htmlFor="category" className="form-label">
           choose a category
         </label>
-        <select
-          {...register('categories')}
-          name="category"
-          id="category"
-          className="form-select"
-        >
+        <select {...register('categories')} className="form-select">
           <option value="category"></option>
           {categories.map(category => (
             <option key={category} value={category}>
@@ -83,11 +99,15 @@ const Form = () => {
           </span>
         )}
       </div>
-      <button className="btn btn-primary" type="submit">
+      <button
+        disabled={!isDirty || !isValid}
+        className="btn btn-primary"
+        type="submit"
+      >
         submit
       </button>
     </form>
   );
 };
 
-export default Form;
+export default ExpenseForm;
