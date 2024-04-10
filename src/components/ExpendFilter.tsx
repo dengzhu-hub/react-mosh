@@ -4,7 +4,7 @@ interface Props {
 const ExpendFilter = ({ onSelectCategory }: Props) => {
   return (
     <select
-      className="form-select"
+      className="form-select mt-3 mb-3"
       name=""
       id=""
       onChange={e => onSelectCategory(e.target.value)}
