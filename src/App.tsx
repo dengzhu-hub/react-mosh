@@ -6,6 +6,9 @@ import ExpenseList from './ExpenseList';
 import ExpenseForm, { ExpenseFormData } from './components/Form/Form';
 
 function App() {
+  const jack = 'hello worldad';
+  console.log(jack);
+
   const [selectedCategory, setSelectedCategory] = useState('');
   const [expenses, setExpenses] = useState([
     {
